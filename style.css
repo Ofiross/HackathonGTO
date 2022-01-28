@@ -1,0 +1,119 @@
+#rollBtn {
+    position: relative;
+    margin-left: 35px;
+    background-color: transparent;
+    border-radius: 5px;
+    font-size: 25px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#rollBtn:hover {
+    background-color: rgb(221, 221, 221);
+    cursor: pointer;
+}
+  
+#cube .front {
+    transform: 
+      translateZ(100px);
+}
+  
+#cube .back {
+    transform: 
+      rotateX(-180deg)
+      translateZ(100px);
+}
+  
+#cube .right {
+    transform:
+      rotateY(90deg)
+      translateZ(100px);
+}
+  
+#cube .left {
+    transform:
+      rotateY(-90deg)
+      translateZ(100px);
+}
+  
+#cube .top {
+    transform:
+      rotateX(90deg)
+      translateZ(100px);
+}
+  
+#cube .bottom {
+    transform:
+      rotateX(-90deg)
+      translateZ(100px);
+}
+  
+.rollDice {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    margin: 0 auto 40px;
+    perspective: 1000px;
+    perspective-origin: 50% 100%;
+}
+  
+#cube {
+    width: 100%;
+    height: 100%;
+    top: 100px;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 6s;
+}
+    
+#cube div {
+    background: red;
+    display: block;
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    border: 2px solid #ab1a1a;
+    border-radius: 10px;
+    margin: 0 auto;
+    font-size: 500%;
+    text-align: center;
+    padding: 50px 0;
+}
+  
+.dot {
+    display: block;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    border-radius: 15px;  
+}
+
+
+
+
+.front .dot1 { top: 85px; left: 85px; }
+
+.bottom .dot1 { top: 45px; left: 45px; }
+.bottom .dot2 { top: 125px; left: 125px; }
+
+.right .dot1 { top: 45px; left: 45px; }
+.right .dot2 { top: 85px; left: 85px; }
+.right .dot3 { top: 125px; left: 125px; }
+
+.left .dot1 { top: 45px; left: 45px; }
+.left .dot2 { top: 45px; left: 125px; }
+.left .dot3 { top: 125px; left: 45px; }
+.left .dot4 { top: 125px; left: 125px; }
+
+.top .dot1 { top: 45px; left: 45px; }
+.top .dot2 { top: 45px; left: 125px; }
+.top .dot3 { top: 85px; left: 85px; }
+.top .dot4 { top: 125px; left: 45px; }
+.top .dot5 { top: 125px; left: 125px; }
+
+.back .dot1 { top: 45px; left: 45px; }
+.back  .dot2 { top: 45px; left: 85px; }
+.back  .dot3 { top: 45px; left: 125px; }
+.back  .dot4 { top: 125px; left: 45px; }
+.back  .dot5 { top: 125px; left: 85px; }
+.back  .dot6 { top: 125px; left: 125px; }
