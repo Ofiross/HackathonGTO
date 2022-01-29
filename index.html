@@ -113,8 +113,8 @@
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="player2_choise">Player 2</label>
                     <select class="form-select" id="player2_choise">
-                        <option selected value="1">Human</option>
-                        <option value="2">Computer</option>
+                        <option  value="1">Human</option>
+                        <option selected value="2">Computer</option>
                     </select>
                 </div>
                 <div class="input-group mb-3">
@@ -137,7 +137,7 @@
         </div>
         <button id="startgame" class="neon-button" onclick="runGame();">Start!</button>
         <button id="roll" class="neon-button" onclick="makeMove();" style="display: none;">Roll</button>
-        <button id="passturn" class="neon-button" onclick="passTurn();" style="display: none;">Pass</button>
+        <button id="passturn" disabled class="neon-button" onclick="passTurn();" style="display: none;">Pass</button>
     </div>
 
     <script src="./main.js"></script>

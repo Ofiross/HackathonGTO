@@ -2,7 +2,7 @@ let currentPlayers = [];
 let currentTurn = 0; // index of array "currentPlayers"
 let currentSum = 0;
 let number = 0;
-const goal = 30;
+const goal = 10;
 
 /* AI strategy variables */
 const recommendedThrows = 4;
@@ -78,6 +78,7 @@ function makeMove() {
     number = throwDice();
     if (number == 1) {
         eatScore(currentPlayers[currentTurn]);
+        setTimeout(updateScore, 2500, 0);
         passTurn();
         return;
     }
@@ -86,31 +87,36 @@ function makeMove() {
     let espectedScore = currentPlayers[currentTurn].score + currentSum;
     console.log("score is: ", currentPlayers[currentTurn].score, " current score is: ", currentSum, " espectedScore = ", espectedScore);
     //update score
-
-    document.querySelector(".player-active #player1Current").textContent = currentSum;
-    document.querySelector(".player-active #player1Total").textContent = espectedScore;
+    setTimeout(updateScore, 2500, espectedScore);
     if (espectedScore >= goal) {
         gameOver(currentPlayers[currentTurn]);
     }
-
-    // document.getElementById("roll").disabled = false; need to block buttons
-    // document.getElementById("passturn").disabled = false; need to block buttons
     return;
+}
+
+function updateScore(espectedScore){
+    document.querySelector(".player-active #player1Current").textContent = currentSum;
+    document.querySelector(".player-active #player1Total").textContent = espectedScore;
 }
 
 /*
  *  Throws dice
  */
 function throwDice() {
+    document.getElementById('passturn').disabled = true;
+    document.getElementById('roll').disabled = true;
     let number = Math.ceil(Math.random() * 6);
     // rolling animation
-    // document.getElementById("roll").disabled = true; need to block buttons
-    // document.getElementById("passturn").disabled = true; need to block buttons
     dice(number);
     console.log("Dice shows: ", number);
+    setTimeout(activateButtons, 2500);
     return number;
 }
 
+function activateButtons(){
+    document.getElementById("roll").disabled = false;
+    document.getElementById("passturn").disabled = false;
+}
 /*
  *  Pig eats current score in case number equal one
  */
@@ -144,7 +150,8 @@ function gameOver() {
     // draws banner on html
 document.querySelector("#header>h1").textContent = `Game over. ${currentPlayers[currentTurn].name} won!`;
     console.log(`Game over. ${currentPlayers[currentTurn].name} won!`);
-
+    document.getElementById("roll").disabled = true;
+    document.getElementById("passturn").disabled = true;
     return;
 }
 
