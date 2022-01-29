@@ -1,86 +1,246 @@
+/******************** NOEN LIGHTS*****************/
+:root {
+    --clr-neon: hsl(317 100% 54%);
+    --clr-bg: hsl(323 21% 16%);
+  }
+  
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  a{
+    font-size: 1em;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--clr-neon);
+    border: var(--clr-neon) 0.125em solid;
+    padding: 0.25em 0.5em;
+    border-radius: 0.25em;
+    text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em currentColor;
+    box-shadow: inset 0 0 0.5em 0 var(--clr-neon), 0 0 0.5em 0 var(--clr-neon);
+    position: relative; 
+  }
+  .neon-button
+   {
+    font-size: 2rem;
+    background-color:  rgb(221, 221, 221);
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--clr-neon);
+    border: var(--clr-neon) 0.125em solid;
+    padding: 0.25em 0.5em;
+    border-radius: 0.25em;
+    text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em currentColor;
+    box-shadow: inset 0 0 0.5em 0 var(--clr-neon), 0 0 0.5em 0 var(--clr-neon);
+    position: relative;
+  }
+  
+  .neon-button::before
+   {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    background: var(--clr-neon);
+    top: 80%;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
+    filter: blur(1em);
+    opacity: 0.7;
+  }
+  .neon-button::after
+   {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 2em 0.5em var(--clr-neon);
+    opacity: 0;
+    background-color: var(--clr-neon);
+    z-index: -1;
+    transition: opacity 100ms linear;
+  }
+  
+  .neon-button:hover,
+  .neon-button:focus
+   {
+    color: var(--clr-bg);
+    text-shadow: none;
+  }
+  
+  .neon-button:hover::before,
+  .neon-button:focus::before {
+    opacity: 1;
+  }
+  .neon-button:hover::after,
+  .neon-button:focus::after {
+    opacity: 1;
+  }
+/************************** NEON END *******************************/
 body {
     margin: 0;
     padding: 0;
-    background-color: LightPink;
-}
-
-.container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 50vh 50vh;
-}
-
-.player-container {
-    margin: 0;
-    background-color: LightPink;
-
+    color: var(--clr-neon);
+    background-color: var(--clr-bg);
+    font-family: "Balsamiq Sans", cursive;
 }
 
 .smart-border {
-    border: 4px solid CornflowerBlue;
+    border: var(--clr-neon) 0.125em solid;
     border-radius: 10px;
 }
 
-.player-active {
-    background-color: HotPink;
-    border-color: MidnightBlue;
+.player-container {
+    opacity: 80%;
 }
 
+.player-active {
+    opacity: 100%;
+    box-shadow: 0 0 10px var(--clr-bg), 0 0 40px #C600EE, 0 0 80px var(--clr-neon);
+    border: var(--clr-neon) 0.125em solid;
+}
+
+#header{
+    padding-top: .5em;
+    text-align: center;
+    color: var(--clr-neon);
+    position: relative;
+}
+
+/********************************MENU*******************/
 .menu {
     width: 400px;
-    height: 500px;
-    position: absolute;
+    height: 560px;
+    position: fixed;
     left: calc(50% - 200px);
-    top: calc(50% - 250px);
-    background-color: Azure;
+    top: calc(50% - 230px);
+    background-color: var(--clr-bg);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
 }
 
+#links{
+    margin-top: 1em;
+}
 
+#startgame{
+    margin-bottom: 5px;
+    font-size: 2rem;
 
 }
-/**************************************/
+/***********************PLAYERS************************/
+.input-group-text{
+    color: var(--clr-neon);
+}
+
+.form-select{
+    background-color: var(--clr-bg);
+    color: var(--clr-neon);
+    width: 8rem;
+    height: 2rem;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+option{
+    color: var(--clr-neon);
+    background-color: var(--clr-bg);
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 42vh 42vh;
+    width: 95vw;
+    margin-left: 2vw;
+}
+
+.img{
+    margin-top: .5em;
+    margin-left: .5em;
+    height:8em;
+    box-shadow: 0 0 10px var(--clr-bg), 0 0 40px #C600EE, 0 0 80px var(--clr-neon);
+    border-radius: 50%;
+}
+
+.playerEnd {
+    display: flex;
+    justify-content: end;
+    margin-right: 6em;
+    margin-top: .2em;
+}
+
+.playerlogo{
+    text-align: center;
+}
+
+.playerStart{
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 6em;
+    margin-top: .2em;
+}
+/*****************************CUBE**********************/
+.cube {
+    width: 200px;
+    height: 200px;
+    background: none;
+    border: none;
+    border-radius: 20px;
+    margin: 30px;
+}
+
 #gameCube .front {
-    transform:
+    transform: 
       translateZ(100px);
 }
+  
 #gameCube .back {
-    transform:
+    transform: 
       rotateX(-180deg)
       translateZ(100px);
 }
+  
 #gameCube .right {
     transform:
       rotateY(90deg)
       translateZ(100px);
 }
+  
 #gameCube .left {
     transform:
       rotateY(-90deg)
       translateZ(100px);
 }
+  
 #gameCube .top {
     transform:
       rotateX(90deg)
       translateZ(100px);
 }
+  
 #gameCube .bottom {
     transform:
       rotateX(-90deg)
       translateZ(100px);
 }
+
+  
 #gameCube {
-    margin-top: 70vh;
-    left: 45vw;
+    left: calc(50% - 100px);
+    margin-top: calc(50% - 125px);
     position: absolute;
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
     transition: transform 6s;
 }
+    
 #gameCube, .cubeSides {
     background: rgb(250, 0, 208);
     position: absolute;
@@ -93,7 +253,9 @@ body {
     text-align: center;
     padding: 50px 0;
     color: #fff;
+
 }
+  
 .dot {
     position: absolute;
     width: 30px;
@@ -101,21 +263,30 @@ body {
     background: #fff;
     border-radius: 15px;  
 }
+
+
+
+
 .front .dot1 { top: 85px; left: 85px; }
+
 .bottom .dot1 { top: 45px; left: 45px; }
 .bottom .dot2 { top: 125px; left: 125px; }
+
 .right .dot1 { top: 45px; left: 45px; }
 .right .dot2 { top: 85px; left: 85px; }
 .right .dot3 { top: 125px; left: 125px; }
+
 .left .dot1 { top: 45px; left: 45px; }
 .left .dot2 { top: 45px; left: 125px; }
 .left .dot3 { top: 125px; left: 45px; }
 .left .dot4 { top: 125px; left: 125px; }
+
 .top .dot1 { top: 45px; left: 45px; }
 .top .dot2 { top: 45px; left: 125px; }
 .top .dot3 { top: 85px; left: 85px; }
 .top .dot4 { top: 125px; left: 45px; }
 .top .dot5 { top: 125px; left: 125px; }
+
 .back .dot1 { top: 45px; left: 45px; }
 .back  .dot2 { top: 45px; left: 85px; }
 .back  .dot3 { top: 45px; left: 125px; }

@@ -10,70 +10,138 @@
 </head>
 
 <body>
+    <div id="header"><h1>Piggies - A game of chance and greed</h1></div>
     <div class="container">
-        <div class="player-container smart-border player-active"></div>
-        <div class="player-container smart-border"></div>
-        <div class="player-container smart-border"></div>
-        <div class="player-container smart-border"></div>
+        <!---------------player1--------------->
+        <div class="player-container smart-border">
+            <div id="player1" class="col playerStart">
+                <div class="playerlogo">
+                    <img class="img" src="./assets/playerLogo.png" alt="piggie">
+                    <h2 class="playername">Player 1</h2>
+                    <div class="currentscore">current score: <label id="player1Current"></label></div>
+                    <div class="totalscore">total score: <label id="player1Total"></label></div>
+                </div>
+            </div>
+        </div>
+        <!---------------player2--------------->
+        <div class="player-container smart-border">
+            <div id="player2" class="col  playerEnd">
+                <div class="playerlogo">
+                    <img class="img" src="./assets/playerLogo.png" alt="piggie">
+                    <h2 class="playername">Player 2</h2>
+                    <div class="currentscore">current score: <label id="player1Current"></label></div>
+                    <div class="totalscore">total score: <label id="player1Total"></label></div>
+                </div>
+            </div>
+        </div>
+        <!---------------player3--------------->
+        <div class="player-container smart-border">
+            <div id="player3" class="col playerStart">
+                <div class="playerlogo">
+                    <img class="img" src="./assets/playerLogo.png" alt="piggie">
+                    <h2 class="playername">Player 3</h2>
+                    <div class="currentscore">current score: <label id="player1Current"></label></div>
+                    <div class="totalscore">total score: <label id="player1Total"></label></div>
+                </div>
+            </div>
+        </div>
+        <!---------------player4--------------->
+        <div class="player-container smart-border">
+            <div id="player4" class="col playerEnd">
+                <div class="playerlogo">
+                    <img class="img" src="./assets/playerLogo.png" alt="piggie">
+                    <h2 class="playername">Player 4</h2>
+                    <div class="currentscore">current score: <label id="player1Current"></label></div>
+                    <div class="totalscore">total score: <label id="player1Total"></label></div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 
     <div class="menu smart-border sub-menu">
-        <a href="#">Rules</a>
-        <div id="gameCube">
-            <div class="front cubeSides">
-                <span class="dot dot1"></span>
-            </div>
-            <div class="back cubeSides">
-                <span class="dot dot1"></span>
-                <span class="dot dot2"></span>
-                <span class="dot dot3"></span>
-                <span class="dot dot4"></span>
-                <span class="dot dot5"></span>
-                <span class="dot dot6"></span>
-            </div>
-            <div class="right cubeSides">
-                <span class="dot dot1"></span>
-                <span class="dot dot2"></span>
-                <span class="dot dot3"></span>
-            </div>
-            <div class="left cubeSides">
-                <span class="dot dot1"></span>
-                <span class="dot dot2"></span>
-                <span class="dot dot3"></span>
-                <span class="dot dot4"></span>
-            </div>
-            <div class="top cubeSides">
-                <span class="dot dot1"></span>
-                <span class="dot dot2"></span>
-                <span class="dot dot3"></span>
-                <span class="dot dot4"></span>
-                <span class="dot dot5"></span>
-            </div>
-            <div class="bottom cubeSides">
-                <span class="dot dot1"></span>
-                <span class="dot dot2"></span>
+        <div id="links">
+            <a href="#">Rules</a>
+            <a href="#" onclick="newGame();">New Game</a>
+        </div>
+        <div class="cube">
+            <div id="gameCube">
+                <div class="front cubeSides">
+                    <span class="dot dot1"></span>
+                </div>
+                <div class="back cubeSides">
+                    <span class="dot dot1"></span>
+                    <span class="dot dot2"></span>
+                    <span class="dot dot3"></span>
+                    <span class="dot dot4"></span>
+                    <span class="dot dot5"></span>
+                    <span class="dot dot6"></span>
+                </div>
+                <div class="right cubeSides">
+                    <span class="dot dot1"></span>
+                    <span class="dot dot2"></span>
+                    <span class="dot dot3"></span>
+                </div>
+                <div class="left cubeSides">
+                    <span class="dot dot1"></span>
+                    <span class="dot dot2"></span>
+                    <span class="dot dot3"></span>
+                    <span class="dot dot4"></span>
+                </div>
+                <div class="top cubeSides">
+                    <span class="dot dot1"></span>
+                    <span class="dot dot2"></span>
+                    <span class="dot dot3"></span>
+                    <span class="dot dot4"></span>
+                    <span class="dot dot5"></span>
+                </div>
+                <div class="bottom cubeSides">
+                    <span class="dot dot1"></span>
+                    <span class="dot dot2"></span>
+                </div>
             </div>
         </div>
-            <div>
-                <label for="player1">Player1 </label>
-                <input type="button" id="player1" name="player1" value="Human" onclick="changePlayer();">
+        <div>
+            <div id="playerchoise">
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="player1_choise">Player 1</label>
+                    <select class="form-select" id="player1_choise">
+                        <option selected value="1">Human</option>
+                        <option value="2">Computer</option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="player2_choise">Player 2</label>
+                    <select class="form-select" id="player2_choise">
+                        <option selected value="1">Human</option>
+                        <option value="2">Computer</option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="player3_choise">Player 3</label>
+                    <select class="form-select" id="player3_choise">
+                        <option value="1">Human</option>
+                        <option value="2">Computer</option>
+                        <option selected value="3">None</option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="player4_choise">Player 4</label>
+                    <select class="form-select" id="player4_choise">
+                        <option value="1">Human</option>
+                        <option value="2">Computer</option>
+                        <option selected value="3">None</option>
+                    </select>
+                </div>
             </div>
-            <div>
-                <label for="player1">Player2 </label>
-                <input type="button" id="player2" name="player1" value="Human" onclick="changePlayer();">
-            </div>
-            <div>
-                <label for="player1">Player3 </label>
-                <input type="button" id="player3" name="player1" value="None" onclick="changePlayer();">
-            </div>
-            <div>
-                <label for="player1">Player4 </label>
-                <input type="button" id="player4" name="player1" value="None" onclick="changePlayer();">
-            </div>
-            <button id="start" onclick="runGame();">Start!</button>
+        </div>
+        <button id="startgame" class="neon-button" onclick="runGame();">Start!</button>
+        <button id="roll" class="neon-button" onclick="makeMove();" style="display: none;">Roll</button>
+        <button id="passturn" class="neon-button" onclick="passTurn();" style="display: none;">Pass</button>
     </div>
 
+    <script src="./main.js"></script>
 </body>
-<script src="./main.js"></script>
 
-</html> 
+
+</html>
