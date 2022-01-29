@@ -2,13 +2,17 @@ let currentPlayers = [];
 let currentTurn = 0; // index of array "currentPlayers"
 let currentSum = 0;
 let number = 0;
-const goal = 10;
+const goal = 100;
 
 /* AI strategy variables */
 const recommendedThrows = 4;
 const scoreToStop = 15;
 const scoreToContinue = 5;
 let tryesOfAI = 0;
+
+for (pl of document.getElementsByClassName("player-container")){
+pl.addEventListener("change",()=>console.log("test"));
+console.log(pl)}
 /****************************************************************************************************************** */
 /*
  *  Start a game
@@ -22,10 +26,11 @@ function runGame() {
         let race = document.getElementById("player" + i + "_choise").value;
         switch (Number(race)) {
             case 1:
-                currentPlayers.push(createPlayer("Player" + i, "human"))
+                currentPlayers.push(createPlayer("Player " + i, "human"));
                 break;
             case 2:
-                currentPlayers.push(createPlayer("Player" + i, "computer"))
+                currentPlayers.push(createPlayer("Player " + i, "computer"));
+                document.getElementsByClassName("player-container")[i-1].classList.add("computer");
                 break;
         }
     }
@@ -87,7 +92,7 @@ function makeMove() {
     let espectedScore = currentPlayers[currentTurn].score + currentSum;
     console.log("score is: ", currentPlayers[currentTurn].score, " current score is: ", currentSum, " espectedScore = ", espectedScore);
     //update score
-    setTimeout(updateScore, 2500, espectedScore);
+    setTimeout(updateScore, 2000, espectedScore);
     if (espectedScore >= goal) {
         gameOver(currentPlayers[currentTurn]);
     }
@@ -177,6 +182,10 @@ function newGame() {
 
 
 //------------------------------------------------------------------------------------------------
+function computerMoves(){
+    console.log("computer pass");
+    return false;
+}
 /*
  * AI strategy
  */
