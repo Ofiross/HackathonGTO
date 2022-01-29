@@ -1,0 +1,40 @@
+body{
+    background-color: salmon;
+    height: 100vh;
+}
+#mainheader{
+    text-align: center;
+    padding-top: 1em;
+}
+.container{
+    display: grid;
+    justify-content: center;
+}
+#gamewrapper{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    align-content: space-between;
+    width:90vw;
+} 
+.col{
+    display:grid;
+    justify-content: center;
+    text-align: center;
+    width: 20em;
+    padding-top: 2em;
+}
+.img{
+    height:10em;
+}
+.players{
+    width: 20em;
+    border:2px solid;
+    margin:0;
+    padding:5px;
+}
+#gameplay{
+    position: absolute;
+    left: 40%;
+    top: 60%;
+}
