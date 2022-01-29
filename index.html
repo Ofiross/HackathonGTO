@@ -6,19 +6,89 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PIGGIES</title>
+
+    <!--------------------------------------Google fonts------------------------------------------------------>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Mouse+Memoirs&display=swap" rel="stylesheet">
+
+    <!--------------------------------------Font awsome link------------------------------------------------------>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!--------------------------------------Main CSS------------------------------------------------------>
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
+
+    <div id="header">
+        <h1>PIGGIES - A game of chance and greed</h1>
+    </div>
+
+    <!---------------------AUDIO--------------------->
+    <i class="fas fa-play" id="play" onclick="play()"></i>
+    <i class="fas fa-volume-mute" id="mute" onclick="mute()"></i>
+    <div id="player">
+        <audio id="themeAudio" autoplay>
+            <source src="./assets/piggiesmaintheme.mp3" type="audio/mpeg">
+        </audio>
+        <audio src="./assets/victory.mp3" id="victory"></audio>
+        <audio src="./assets/diceroll.mp3" id="diceroll"></audio>
+        <audio src="./assets/pigsnort.mp3" id="pigsnort"></audio>
+    </div>
     <div class="container">
-        <div class="player-container smart-border player-active"></div>
-        <div class="player-container smart-border"></div>
-        <div class="player-container smart-border"></div>
-        <div class="player-container smart-border"></div>
+        <!---------------player1--------------->
+        <div class="player-container smart-border">
+            <div id="player1" class="col playerStart">
+                <div class="playerlogo">
+                    <img class="img" src="./assets/playerLogo.png" alt="piggie">
+                    <h2 class="playername">Player 1</h2>
+                    <div class="currentscore">current score: <label id="player1Current">0</label></div>
+                    <div class="totalscore">total score: <label id="player1Total">0</label></div>
+                </div>
+            </div>
+        </div>
+        <!---------------player2--------------->
+        <div class="player-container smart-border">
+            <div id="player2" class="col  playerEnd">
+                <div class="playerlogo">
+                    <img class="img" src="./assets/playerLogo.png" alt="piggie">
+                    <h2 class="playername">Player 2</h2>
+                    <div class="currentscore">current score: <label id="player1Current">0</label></div>
+                    <div class="totalscore">total score: <label id="player1Total">0</label></div>
+                </div>
+            </div>
+        </div>
+        <!---------------player3--------------->
+        <div class="player-container smart-border">
+            <div id="player3" class="col playerStart">
+                <div class="playerlogo">
+                    <img class="img" src="./assets/playerLogo.png" alt="piggie">
+                    <h2 class="playername">Player 3</h2>
+                    <div class="currentscore">current score: <label id="player1Current">0</label></div>
+                    <div class="totalscore">total score: <label id="player1Total">0</label></div>
+                </div>
+            </div>
+        </div>
+        <!---------------player4--------------->
+        <div class="player-container smart-border">
+            <div id="player4" class="col playerEnd">
+                <div class="playerlogo">
+                    <img class="img" src="./assets/playerLogo.png" alt="piggie">
+                    <h2 class="playername">Player 4</h2>
+                    <div class="currentscore">current score: <label id="player1Current">0</label></div>
+                    <div class="totalscore">total score: <label id="player1Total">0</label></div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 
     <div class="menu smart-border sub-menu">
-        <a href="#">Rules</a>
+        <div id="links">
+            <a href="./rules/rules.html">Rules</a>
+            <a href="#" onclick="newGame();">New Game</a>
+        </div>
         <div class="cube">
             <div id="gameCube">
                 <div class="front cubeSides">
@@ -59,47 +129,47 @@
         <div>
             <div id="playerchoise">
                 <div class="input-group mb-3">
-                    <label class="input-group-text" for="inputGroupSelect01">Player 1</label>
-                    <select class="form-select" id="inputGroupSelect01">
-                        <option selected>Choose..</option>
-                        <option value="1">Human</option>
+                    <label class="input-group-text" for="player1_choise">Player 1</label>
+                    <select class="form-select" id="player1_choise">
+                        <option selected value="1">Human</option>
                         <option value="2">Computer</option>
                     </select>
                 </div>
                 <div class="input-group mb-3">
-                    <label class="input-group-text" for="inputGroupSelect01">Player 2</label>
-                    <select class="form-select" id="inputGroupSelect01">
-                        <option selected>Choose..</option>
+                    <label class="input-group-text" for="player2_choise">Player 2</label>
+                    <select class="form-select" id="player2_choise">
                         <option value="1">Human</option>
-                        <option value="2">Computer</option>
+                        <option selected value="2">Computer</option>
                     </select>
                 </div>
                 <div class="input-group mb-3">
-                    <label class="input-group-text" for="inputGroupSelect01">Player 3</label>
-                    <select class="form-select" id="inputGroupSelect01">
-                        <option selected>Choose..</option>
+                    <label class="input-group-text" for="player3_choise">Player 3</label>
+                    <select class="form-select" id="player3_choise">
                         <option value="1">Human</option>
                         <option value="2">Computer</option>
-                        <option value="3">None</option>
+                        <option selected value="3">None</option>
                     </select>
                 </div>
                 <div class="input-group mb-3">
-                    <label class="input-group-text" for="inputGroupSelect01">Player 4</label>
-                    <select class="form-select" id="inputGroupSelect01">
-                        <option selected>Choose..</option>
+                    <label class="input-group-text" for="player4_choise">Player 4</label>
+                    <select class="form-select" id="player4_choise">
                         <option value="1">Human</option>
                         <option value="2">Computer</option>
-                        <option value="3">None</option>
+                        <option selected value="3">None</option>
                     </select>
                 </div>
             </div>
         </div>
-        <button id="rollBtn">Start!</button>
+        <button id="startgame" class="neon-button" onclick="runGame();">Start!</button>
+        <button id="roll" class="neon-button" onclick="makeMove()" style="display: none;">Roll</button>
+        <button id="passturn" disabled class="neon-button" onclick="passTurn();" style="display: none;">Pass</button>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+
+    <div id="gameEnd">
+        <h3 class=".gameOver" data-text="U"><span id="offset">G</span>ame <span id="offset">O</span>ver</h3>
+    </div>
+
     <script src="./main.js"></script>
 </body>
 

@@ -1,85 +1,81 @@
-/*
- *  Create all Players
- */
-let player1 = {
-    name: "Luke Skywalker",
-    picture: "",
-    race: "Human",
-    score: 0,
-    currentThrows: []
-}
-
-let player2 = {
-    name: "Leia Organa",
-    picture: "",
-    race: "Human",
-    score: 0,
-    currentThrows: []
-}
-
-let player3 = {
-    name: "R2-D2",
-    picture: "",
-    race: "Robot",
-    score: 0,
-    currentThrows: []
-}
-
-let player4 = {
-    name: "C-3PO",
-    picture: "",
-    race: "Robot",
-    score: 0,
-    currentThrows: []
-}
-
 let currentPlayers = [];
 let currentTurn = 0; // index of array "currentPlayers"
 let currentSum = 0;
 let number = 0;
-const goal = 30;
+const goal = 50;
 
 /* AI strategy variables */
 const recommendedThrows = 4;
 const scoreToStop = 15;
 const scoreToContinue = 5;
 let tryesOfAI = 0;
-// const robotThinking = setTimeout(function() {console.log(`${currentPlayers[currentTurn].name} desided`);},300);
 
-let currentPlayerH2 = document.getElementById("currentPlayer");
-// currentPlayerH2.addEventListener("onchange",function () {console.log("sdfsf");})
-
-
-/*
- *  Changes a player: Human, Computer, or None
- */
-function changePlayer() {
-    console.log("change player");
+for (pl of document.getElementsByClassName("player-container")) {
+    pl.addEventListener("change", () => console.log("test"));
+    console.log(pl)
 }
+/****************************************************************************************************************** */
 /*
  *  Start a game
  */
 function runGame() {
+    // makes all variables to 0;
+    currentPlayers = [];
     currentSum = 0;
-    for (i = 0; i < 4; i++) {
-        let race = document.getElementById("player" + Number(i + 1)).value;
-        if (race == "Human" || race == "Computer") {
-            currentPlayers.push(pla)
+    // creates players
+    for (i = 1; i <= 4; i++) {
+        let race = document.getElementById("player" + i + "_choise").value;
+        switch (Number(race)) {
+            case 1:
+                currentPlayers.push(createPlayer("Player " + i, "human"));
+                break;
+            case 2:
+                currentPlayers.push(createPlayer("Player " + i, "computer"));
+                document.getElementsByClassName("player-container")[i - 1].classList.add("computer");
+                break;
         }
-        console.log(p);
     }
-    return;
-
-    currentPlayers.forEach(player => player.score = 0);
-
-    //gets every player according buttons on form and appends them to array "currentPlayers"
-    //creates and arranges all divs on html
+    arrangeDivs(currentPlayers.length);//creates and arranges all divs on html
+    //shows/hides buttons
+    document.getElementById("playerchoise").style.display = "none";
+    document.getElementById("startgame").style.display = "none";
+    document.getElementById("roll").style.display = "";
+    document.getElementById("passturn").style.display = "";
+    //make active-player
     currentTurn = Math.floor(Math.random() * currentPlayers.length);
     console.log("currentTurn: ", currentPlayers[currentTurn].name);
-    currentPlayerH2.textContent = currentPlayers[currentTurn].race;
-    if (currentPlayers[currentTurn].race == "Robot") {
-        moveOfAI();
+    makeActive();
+}
+
+function createPlayer(name, race) {
+    let player = {
+        name: name,
+        race: race,
+        score: 0,
+        currentThrows: []
     }
+    return player;
+}
+
+function arrangeDivs(num) {
+    let playerContainers = document.getElementsByClassName("player-container");
+    if (num < 4)
+        playerContainers[3].style.display = "none";
+    else
+        playerContainers[3].style.display = "";
+    if (num < 3)
+        playerContainers[2].style.display = "none";
+    else
+        playerContainers[2].style.display = "";
+
+
+}
+
+function makeActive() {
+    active = document.getElementsByClassName("player-container")[currentTurn];
+    for (pl of document.getElementsByClassName("player-container"))
+        pl.classList.remove("player-active");
+    active.classList.add("player-active");
 }
 
 /*
@@ -89,6 +85,7 @@ function makeMove() {
     number = throwDice();
     if (number == 1) {
         eatScore(currentPlayers[currentTurn]);
+        setTimeout(updateScore, 2500, 0);
         passTurn();
         return;
     }
@@ -96,29 +93,53 @@ function makeMove() {
     currentSum += number;
     let espectedScore = currentPlayers[currentTurn].score + currentSum;
     console.log("score is: ", currentPlayers[currentTurn].score, " current score is: ", currentSum, " espectedScore = ", espectedScore);
+    //update score
+    setTimeout(updateScore, 2000, espectedScore);
     if (espectedScore >= goal) {
+        document.getElementById('gameEnd').style.display = 'block';
+        document.getElementById("victory").play();
         gameOver(currentPlayers[currentTurn]);
+        return;
     }
-    return;
+
+}
+
+function updateScore(espectedScore) {
+    document.querySelector(".player-active #player1Current").textContent = currentSum;
+    document.querySelector(".player-active #player1Total").textContent = espectedScore;
 }
 
 /*
- *  Make a turn
+ *  Throws dice
  */
 function throwDice() {
-    // rolling animation
+
+    document.getElementById('passturn').disabled = true;
+    document.getElementById('roll').disabled = true;
     let number = Math.ceil(Math.random() * 6);
+    // rolling animation
+    dice(number);
+    document.getElementById('diceroll').play();
     console.log("Dice shows: ", number);
+    setTimeout(resetCube, 4000)
+    setTimeout(activateButtons, 4000);
     return number;
 }
 
+function activateButtons() {
+    document.getElementById("roll").disabled = false;
+    document.getElementById("passturn").disabled = false;
+}
 /*
  *  Pig eats current score in case number equal one
  */
 function eatScore(player) {
+    setTimeout(document.getElementById('pigsnort').play(), 4000)
     currentSum = 0;
+    document.querySelector(".player-active #player1Total").textContent = currentPlayers[currentTurn].score;
     player.currentThrows = [];
-    console.log("current score eaten: ")
+    console.log("current score eaten");
+    // <---- animation / voice of defeat
 }
 
 /*
@@ -126,15 +147,14 @@ function eatScore(player) {
  */
 function passTurn() {
     currentPlayers[currentTurn].score += currentSum;
+    document.querySelector(".player-active #player1Current").textContent = 0;
     currentSum = 0;
     if (currentTurn < currentPlayers.length - 1)
         currentTurn++;
     else
         currentTurn = 0;
-    // setActivePlayer(currentTurn); need to draw point of frames on html
     console.log("currentTurn: ", currentPlayers[currentTurn].name);
-    currentPlayerH2.textContent = currentPlayers[currentTurn].race;
-
+    makeActive();
 }
 
 /*
@@ -142,11 +162,40 @@ function passTurn() {
  */
 function gameOver() {
     // draws banner on html
+    document.querySelector("#header>h1").textContent = `${currentPlayers[currentTurn].name} won!`;
     console.log(`Game over. ${currentPlayers[currentTurn].name} won!`);
+    document.getElementById("roll").disabled = true;
+    document.getElementById("passturn").disabled = true;
     return;
 }
 
+/*
+ * New Game
+ */
+function newGame() {
+    document.getElementById('gameEnd').style.display = 'none'
+    arrangeDivs(4);
+    //shows/hides buttons
+    document.getElementById("playerchoise").style.display = "";
+    document.getElementById("startgame").style.display = "";
+    document.getElementById("roll").style.display = "none";
+    document.getElementById("passturn").style.display = "none";
+    //make active-player
+    for (player of document.querySelectorAll(".player-container")) {
+        player.classList.remove("player-active");
+    }
+    document.querySelectorAll(".currentscore").forEach(item => item.textContent = "current score: ");
+    document.querySelectorAll(".totalscore").forEach(item => item.textContent = "total score: ");
+    document.querySelector("#header>h1").textContent = "Piggies - A game of chance and greed";
+}
+
+
+
 //------------------------------------------------------------------------------------------------
+function computerMoves() {
+    console.log("computer pass");
+    return false;
+}
 /*
  * AI strategy
  */
@@ -197,6 +246,7 @@ function moveOfAI() {
     console.log("score is: ", currentPlayers[currentTurn].score, " current score is: ", currentSum, " espectedScore = ", espectedScore);
 
     if (espectedScore >= goal) {
+        document.getElementById('gameEnd').style.display = 'block';
         gameOver(currentPlayers[currentTurn]);
         return
     }
@@ -222,34 +272,51 @@ let six = 'rotateX(1260deg) rotateY(720deg)';
 
 
 //the program which base on the random number assign the correct coordinates to show the right cube pattern
-let dice = () => {
-
-    let playetDice = Math.floor(Math.random() * 6) + 1;
-
-    switch (true) {
-        case (playetDice == 1):
+let dice = (number) => {
+    switch (number) {
+        case 1:
+            cube.style.webkitTransform = `${one}`;
             cube.style.transform = `${one}`;
             break;
-        case (playetDice == 2):
+        case 2:
+            cube.style.webkitTransform = `${two}`;
             cube.style.transform = `${two}`;
             break;
-        case (playetDice == 3):
+        case 3:
+            cube.style.webkitTransform = `${three}`;
             cube.style.transform = `${three}`;
             break;
-        case (playetDice == 4):
+        case 4:
+            cube.style.webkitTransform = `${four}`;
             cube.style.transform = `${four}`;
             break;
-        case (playetDice == 5):
+        case 5:
+            cube.style.webkitTransform = `${four}`;
             cube.style.transform = `${five}`;
             break;
-        case (playetDice == 6):
+        case 6:
+            cube.style.webkitTransform = `${six}`
             cube.style.transform = `${six}`;
             break;
     };
 };
 
-//calling the roll a dice funtion onClick
-document.getElementById('rollBtn').addEventListener('click', dice);
+let resetCube = () => {
+    return cube.style.transform = 'none';
+};
+
+/*********************************************AUDIO PLAYER************************************************ */
+let volumeOff = () => {
+    document.getElementsByTagName('audio').volume = 0;
+};
 
 
-// Game menu with show and hide button
+function play() {
+    var audio = document.getElementById("themeAudio");
+    audio.play();
+};
+
+function mute() {
+    var audio = document.getElementById("themeAudio");
+    audio.pause();
+};
